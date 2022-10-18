@@ -1,41 +1,31 @@
-const express = require("express");
+import express from "express";
+import {
+  getFriendFromList,
+  getFriendsList,
+} from "./controllers/friendsController.js";
+import { addMessages, getMessages } from "./controllers/messagesController.js";
 
 const app = express();
-
 const PORT = process.argv.PORT || 3000;
 
-const friendList = [
-  {
-    id: 0,
-    name: "Sir Isaac Newton",
-  },
-  {
-    id: 0,
-    name: "Albert Einstein",
-  },
-];
-
+app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Response text brotha, take it!");
 });
 
-// Sending list of all friends
-app.get("/friends", (req, res) => {
-  res.json(friendList);
-});
+// friends endpoints
+// GET all frineds
+app.get("/friends", getFriendsList);
 
-// Sending friend by id
-app.get("/friends/:friendId", (req, res) => {
-  const friendId = Number(req.params.friendId);
-  const friend = friendList[friendId];
+// GET Sending friend by id
+app.get("/friends/:friendId", getFriendFromList);
 
-  if (!friend) {
-    res.status(404).json({
-      error: "Friend was not found.",
-    });
-  }
+// messages endpoints
+// GET get all messages
+app.get("/messages", getMessages);
 
-  res.json(friend);
-});
+// POST add message to messages object
+app.post("/messages", addMessages);
 
+// starting server
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}...`));
