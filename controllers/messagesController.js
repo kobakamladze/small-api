@@ -1,9 +1,15 @@
 import _ from "lodash";
+import path, { dirname } from "path";
+
+// __dirname
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 import { messages } from "../models/messagesModel.js";
 
 // get all messages
 function getMessages(req, res) {
-  res.status(200).json("Albert: :P");
+  res.sendFile(path.join(__dirname, "..", "public", "manToWolfExplorer.jpg"));
 }
 
 // add message
@@ -17,7 +23,7 @@ function addMessages(req, res) {
   }
 
   messages.push({ name, message, date: Date.now() });
-  res.status(200).json(_.last(messages));
+  res.status(201).json(_.last(messages));
 }
 
 export { addMessages, getMessages };

@@ -26,7 +26,7 @@ function addFriend(req, res) {
   }
 
   friendList.push({ id: friendList.length, name });
-  res.status(200).json(_.last(friendList));
+  res.status(201).json(_.last(friendList));
 }
 
 export { getFriendFromList, getFriendsList, addFriend };

@@ -4,7 +4,7 @@ const friendList = [
     name: "Sir Isaac Newton",
   },
   {
-    id: 0,
+    id: 1,
     name: "Albert Einstein",
   },
 ];
