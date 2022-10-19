@@ -1,9 +1,9 @@
-// object of messages
-const messages = {};
+import _ from "lodash";
+import { messages } from "../models/messagesModel.js";
 
 // get all messages
 function getMessages(req, res) {
-  res.ststus(200).json("Albert: :P");
+  res.status(200).json("Albert: :P");
 }
 
 // add message
@@ -12,18 +12,12 @@ function addMessages(req, res) {
     body: { name, message },
   } = req;
 
-  if (name && message) {
-    messages[name].message = message;
-    messages[name].date = Date.now();
-  }
-
-  const addedMessage = messages[name];
-
-  if (!addedMessage) {
+  if (!name || !message) {
     return res.status(400).json("Something went wrong...");
   }
 
-  res.status(200).json(addedMessage);
+  messages.push({ name, message, date: Date.now() });
+  res.status(200).json(_.last(messages));
 }
 
 export { addMessages, getMessages };

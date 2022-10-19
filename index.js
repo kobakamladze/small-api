@@ -2,6 +2,7 @@ import express from "express";
 import {
   getFriendFromList,
   getFriendsList,
+  addFriend,
 } from "./controllers/friendsController.js";
 import { addMessages, getMessages } from "./controllers/messagesController.js";
 
@@ -19,6 +20,9 @@ app.get("/friends", getFriendsList);
 
 // GET Sending friend by id
 app.get("/friends/:friendId", getFriendFromList);
+
+// POST add friend to friendList
+app.post("/addFriend", addFriend);
 
 // messages endpoints
 // GET get all messages

@@ -1,13 +1,5 @@
-const friendList = [
-  {
-    id: 0,
-    name: "Sir Isaac Newton",
-  },
-  {
-    id: 0,
-    name: "Albert Einstein",
-  },
-];
+import _ from "lodash";
+import { friendList } from "../models/friendsModel.js";
 
 function getFriendFromList(req, res) {
   const friendId = Number(req.params.friendId);
@@ -26,4 +18,15 @@ function getFriendsList(req, res) {
   res.json(friendList);
 }
 
-export { getFriendFromList, getFriendsList };
+function addFriend(req, res) {
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json("Soemthing went wrong buddyyy");
+  }
+
+  friendList.push({ id: friendList.length, name });
+  res.status(200).json(_.last(friendList));
+}
+
+export { getFriendFromList, getFriendsList, addFriend };
