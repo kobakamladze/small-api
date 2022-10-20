@@ -3,7 +3,7 @@ import { friendsRouter } from "./routes/friendsRouter.js";
 import { messagesRouter } from "./routes/messagesRouter.js";
 
 const app = express();
-const PORT = process.argv.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
